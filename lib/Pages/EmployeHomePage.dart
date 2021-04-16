@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Auth/SearchDeligate.dart';
 
 import 'CreateEmployeePage.dart';
 
@@ -22,7 +23,12 @@ class _EmployeeHomePageState extends State<EmployeeHomePage> {
                     ),
                   ),
               child: Text("Create Employee")),
-          IconButton(onPressed: () {}, icon: Icon(Icons.search))
+          IconButton(onPressed: ()  {
+            showSearch(
+              context: context,
+              delegate: DataSearch(),
+            );
+          }, icon: Icon(Icons.search))
         ],
       ),
     );
