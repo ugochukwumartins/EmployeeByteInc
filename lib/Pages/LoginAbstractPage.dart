@@ -12,6 +12,13 @@ class LogingAbstact extends StatefulWidget with InputValidator {
 }
 
 class _LogingAbstactState extends State<LogingAbstact> {
+  final TextEditingController _controller = new TextEditingController();
+  var items = [
+    'Working a lot harder',
+    'Being a lot smarter',
+    'Being a self-starter',
+    'Placed in charge of trading charter'
+  ];
   final format = DateFormat("yyyy-MM-dd");
 
   final TextEditingController _FirstnameController =
@@ -184,30 +191,71 @@ class _LogingAbstactState extends State<LogingAbstact> {
 
               //   onEditingComplete: _signIn,
             ),
-            TextField(
-              //focusNode: _passwordNode,
-              controller: _CountryController,
-              onChanged: (password) => _update(),
-              decoration: InputDecoration(
-                errorText: PasswordErroText ? widget.LogError : null,
-                labelText: "Country",
-                //  enabled: _isLoading == false,
-              ),
-              keyboardType: TextInputType.text,
-              //   onEditingComplete: _signIn,
-            ),
-            TextField(
-              //focusNode: _passwordNode,
-              controller: _StateController,
-              onChanged: (password) => _update(),
-              decoration: InputDecoration(
-                errorText: PasswordErroText ? widget.LogError : null,
-                labelText: "State",
-                //  enabled: _isLoading == false,
-              ),
-              keyboardType: TextInputType.text,
 
-              //   onEditingComplete: _signIn,
+            Row(
+              children: <Widget>[
+                new Expanded(
+                  child: TextField(
+                    //focusNode: _passwordNode,
+                    controller: _CountryController,
+                    onChanged: (password) => _update(),
+                    decoration: InputDecoration(
+                      errorText: PasswordErroText ? widget.LogError : null,
+                      labelText: "Country",
+                      //  enabled: _isLoading == false,
+                    ),
+                    keyboardType: TextInputType.text,
+                    //   onEditingComplete: _signIn,
+                  ),
+                ),
+                PopupMenuButton<String>(
+                  icon: const Icon(Icons.arrow_drop_down),
+                  onSelected: (String value) {
+                    _CountryController.text = value;
+                  },
+                  itemBuilder: (BuildContext context) {
+                    return items.map<PopupMenuItem<String>>(
+                      (String value) {
+                        return new PopupMenuItem(
+                            child: new Text(value), value: value);
+                      },
+                    ).toList();
+                  },
+                ),
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                new Expanded(
+                  child: TextField(
+                    //focusNode: _passwordNode,
+                    controller: _StateController,
+                    onChanged: (password) => _update(),
+                    decoration: InputDecoration(
+                      errorText: PasswordErroText ? widget.LogError : null,
+                      labelText: "State",
+                      //  enabled: _isLoading == false,
+                    ),
+                    keyboardType: TextInputType.text,
+
+                    //   onEditingComplete: _signIn,
+                  ),
+                ),
+                PopupMenuButton<String>(
+                  icon: const Icon(Icons.arrow_drop_down),
+                  onSelected: (String value) {
+                    _StateController.text = value;
+                  },
+                  itemBuilder: (BuildContext context) {
+                    return items.map<PopupMenuItem<String>>(
+                      (String value) {
+                        return new PopupMenuItem(
+                            child: new Text(value), value: value);
+                      },
+                    ).toList();
+                  },
+                ),
+              ],
             ),
 
             SizedBox(
